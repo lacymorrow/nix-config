@@ -7,8 +7,36 @@
       enable = true;
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
-      initExtra = builtins.readFile ../../dotfiles/home/.zshrc;
-      shellAliases = lib.importJSON ../../dotfiles/home/.aliases;
+      # initExtra = builtins.readFile ../../dotfiles/home/.zshrc;
+      shellAliases = {
+        # IDE Aliases
+        c = "code";
+        
+        # Git shortcuts
+        g = "git";
+        gst = "git status";
+        gd = "git diff";
+        gdc = "git diff --cached";
+        gl = "git pull";
+        gup = "git pull --rebase";
+        gp = "git push";
+        
+        # Directory navigation
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        "...." = "cd ../../..";
+        "....." = "cd ../../../..";
+        
+        # Common commands
+        l = "ls -lah";
+        ll = "ls -FGlAhp";
+        ip = "dig +short myip.opendns.com @resolver1.opendns.com";
+        localip = "ipconfig getifaddr en0";
+        
+        # Utility
+        reload = "source ~/.zshrc";
+        brewup = "brew update; brew upgrade; brew cleanup; brew doctor";
+      };
     };
 
     # Git configuration
@@ -67,21 +95,39 @@
         };
       };
     };
+
+    # Additional program configurations
+    bat.enable = true;
+    fzf.enable = true;
+    htop.enable = true;
+    jq.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
-  # Import your dotfiles
-  home.file = {
-    ".aliases".source = ../../dotfiles/home/.aliases;
-    ".bash_profile".source = ../../dotfiles/home/.bash_profile;
-    ".bash_prompt".source = ../../dotfiles/home/.bash_prompt;
-    ".bashrc".source = ../../dotfiles/home/.bashrc;
-    ".docker_aliases".source = ../../dotfiles/home/.docker_aliases;
-    ".editorconfig".source = ../../dotfiles/home/.editorconfig;
-    ".exports".source = ../../dotfiles/home/.exports;
-    ".functions".source = ../../dotfiles/home/.functions;
-    ".gvimrc".source = ../../dotfiles/home/.gvimrc;
-    ".hgrc".source = ../../dotfiles/home/.hgrc;
-    ".hushlogin".source = ../../dotfiles/home/.hushlogin;
-    ".inputrc".source = ../../dotfiles/home/.inputrc;
+  # Import your dotfiles as home files
+  home = {
+    file = {
+      ".aliases".source = ../../dotfiles/home/.aliases;
+      ".bash_profile".source = ../../dotfiles/home/.bash_profile;
+      ".bash_prompt".source = ../../dotfiles/home/.bash_prompt;
+      ".bashrc".source = ../../dotfiles/home/.bashrc;
+      ".docker_aliases".source = ../../dotfiles/home/.docker_aliases;
+      ".editorconfig".source = ../../dotfiles/home/.editorconfig;
+      ".exports".source = ../../dotfiles/home/.exports;
+      ".functions".source = ../../dotfiles/home/.functions;
+      ".gvimrc".source = ../../dotfiles/home/.gvimrc;
+      ".hgrc".source = ../../dotfiles/home/.hgrc;
+      ".hushlogin".source = ../../dotfiles/home/.hushlogin;
+      ".inputrc".source = ../../dotfiles/home/.inputrc;
+    };
+
+    # Basic settings
+    stateVersion = "23.11";
+    
+    # Let Home Manager manage itself
+    enableNixpkgsReleaseCheck = false;
   };
 }
