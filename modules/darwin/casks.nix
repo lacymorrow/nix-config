@@ -1,26 +1,39 @@
-_:
-
-[
+_: [
   # Development Tools
-  "homebrew/cask/docker"
+  "docker"
+  "warp"
   "visual-studio-code"
-
-  # Communication Tools
+  "homebrew/cask/docker"
+  "postman"
+  "cyberduck"
+  
+  # Browsers
+  "firefox"
+  "google-chrome"
+  
+  # Communication  
   "discord"
   # "notion"
   "slack"
   # "telegram"
   "zoom"
-
-  # Utility Tools
-  "syncthing"
-
-  # Entertainment Tools
-  "vlc"
-
+  
   # Productivity Tools
   "raycast"
 
-  # Browsers
-  "google-chrome"
+  # Utilities
+  "syncthing"
+  "angry-ip-scanner"
+  "ngrok"
+  
+  # Media
+  "vlc"
+  "gimp"
+  "inkscape"
+  
+  # System Tools
+  "unetbootin"
+  "virtualbox"
+  "vagrant"
+  "xquartz"
 ]

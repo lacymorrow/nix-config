@@ -1,7 +1,39 @@
 { pkgs }:
 
 with pkgs; [
-  # General packages for development and system management
+  # Shell utilities
+  bat
+  coreutils
+  findutils
+  gawk
+  gnused
+  gnutls
+  less
+  tree
+  wget
+  zsh
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
+
+  # Development tools
+  git
+  nodejs
+  yarn
+  pnpm
+  docker
+  docker-compose
+
+  # System utilities
+  ffmpeg
+  imagemagick
+  trash-cli
+  wget
+  
+  # Additional tools from your Brewfile
+  mas # Mac App Store CLI
+
+      # General packages for development and system management
   alacritty
   # aspell
   # aspellDicts.en
@@ -15,13 +47,6 @@ with pkgs; [
   # sqlite
   # wget
   # zip
-
-  # # Encryption and security tools
-  # age
-  # age-plugin-yubikey
-  # gnupg
-  # libfido2
-
   # # Cloud-related tools and SDKs
   # docker
   # docker-compose
@@ -58,4 +83,5 @@ with pkgs; [
   # # Python packages
   # python39
   # python39Packages.virtualenv # globally install virtualenv
+  
 ]
