@@ -1,8 +1,15 @@
-{ pkgs, config, ... }:
+{ config, pkgs, ... }:
 
 {
-  # Remove the Emacs init block
-  # ".emacs.d/init.el" = {
-  #   text = builtins.readFile ../shared/config/emacs/init.el;
+  # Common configuration files
+  ".config/git/ignore".text = ''
+    .DS_Store
+    .envrc
+    .direnv
+    *.swp
+  '';
+
+  # ".ssh/id_github.pub" = {
+  #   text = githubPublicKey;
   # };
 }

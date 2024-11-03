@@ -33,7 +33,7 @@ with pkgs; [
   # Additional tools from your Brewfile
   mas # Mac App Store CLI
 
-      # General packages for development and system management
+  # General packages for development and system management
   alacritty
   # aspell
   # aspellDicts.en
@@ -47,6 +47,13 @@ with pkgs; [
   # sqlite
   # wget
   # zip
+
+  # # Encryption and security tools
+  # age
+  # age-plugin-yubikey
+  # gnupg
+  # libfido2
+
   # # Cloud-related tools and SDKs
   # docker
   # docker-compose
@@ -83,5 +90,4 @@ with pkgs; [
   # # Python packages
   # python39
   # python39Packages.virtualenv # globally install virtualenv
-  
 ]

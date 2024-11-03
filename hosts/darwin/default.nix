@@ -8,7 +8,8 @@ let user = "tmorrow.cont"; in
     ../../modules/darwin/secrets.nix
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
-     agenix.darwinModules.default
+    ../../modules/darwin/activation-scripts.nix
+    agenix.darwinModules.default
   ];
 
   # Auto upgrade nix package and the daemon service.

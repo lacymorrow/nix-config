@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  emacsOverlaySha256 = "06413w510jmld20i4lik9b36cfafm501864yq8k4vxl5r4hn0j0h";
-in
 {
-
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -13,7 +9,7 @@ in
       allowUnsupportedSystem = true;
     };
 
-    overlays =
+    overlays = 
       # Apply each overlay found in the /overlays directory
       let path = ../../overlays; in with builtins;
       map (n: import (path + ("/" + n)))
