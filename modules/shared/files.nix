@@ -1,16 +1,8 @@
 { pkgs, config, ... }:
 
-# let
-#  githubPublicKey = "ssh-ed25519 AAAA...";
-# in
 {
-
-  # ".ssh/id_github.pub" = {
-  #   text = githubPublicKey;
+  # Remove the Emacs init block
+  # ".emacs.d/init.el" = {
+  #   text = builtins.readFile ../shared/config/emacs/init.el;
   # };
-
-  # Initializes Emacs with org-mode so we can tangle the main config
-  ".emacs.d/init.el" = {
-    text = builtins.readFile ../shared/config/emacs/init.el;
-  };
 }
