@@ -22,10 +22,10 @@ let name = "Lacy Morrow";
       }
     ];
     initExtraFirst = ''
-      # Source aliases file
-      if [ -f ~/.aliases ]; then
-        source ~/.aliases
-      fi
+      # # Source aliases file
+      # if [ -f ~/.aliases ]; then
+      #   source ~/.aliases
+      # fi
 
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh

@@ -8,7 +8,16 @@
   
   # Copy the aliases file to home directory
   ".aliases" = {
-    source = ../../dotfiles/home/.aliases;
-    onChange = "source ~/.aliases";
+    text = builtins.readFile ../../home/.aliases;
+  };
+
+  # Add editorconfig
+  ".editorconfig" = {
+    text = builtins.readFile ../../home/.editorconfig;
+  };
+
+  # Add exports
+  ".exports" = {
+    text = builtins.readFile ../../home/.exports;
   };
 }
