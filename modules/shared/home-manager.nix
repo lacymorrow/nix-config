@@ -4,7 +4,6 @@ let name = "Lacy Morrow";
     user = "tmorrow.cont";
     email = "me@lacymorrow.com"; in
 {
-  # Shared shell configuration
   zsh = {
     enable = true;
     autocd = false;
@@ -56,23 +55,158 @@ let name = "Lacy Morrow";
     '';
   };
 
+
+  # Add npm configuration
+  npm = {
+    enable = true;
+    package = pkgs.nodePackages.npm;
+    
+    # Your npmrc settings
+    config = {
+      init-author-name = name;
+      init-author-email = email;
+      init-author-url = "http://lacymorrow.com/";
+      init-license = "MIT";
+    };
+  };
+
   git = {
     enable = true;
     ignores = [ "*.swp" ];
     userName = name;
     userEmail = email;
-    lfs = {
-      enable = true;
+    lfs.enable = true;
+    
+    aliases = {
+      # View abbreviated SHA, description, and history graph of the latest 20 commits
+      l = "log --pretty=oneline -n 20 --graph --abbrev-commit";
+      # View the current working tree status using the short format
+      s = "status -s";
+      # Show the diff between the latest commit and the current state
+      d = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat";
+      # Pull in remote changes for the current repository and all its submodules
+      p = "pull --recurse-submodules";
+      # Clone a repository including all submodules
+      c = "clone --recursive";
+      # Commit all changes
+      ca = "!git add -A && git commit -av";
+      # Switch to a branch, creating it if necessary
+      go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f";
+      # Show verbose output about tags, branches or remotes
+      tags = "tag -l";
+      branches = "branch --all";
+      remotes = "remote --verbose";
+      # List aliases
+      aliases = "config --get-regexp alias";
+      # Amend the currently staged files to the latest commit
+      amend = "commit --amend --reuse-message=HEAD";
+      # Interactive rebase with the given number of latest commits
+      reb = "!r() { git rebase -i HEAD~$1; }; r";
+      # Find branches containing commit
+      fb = "!f() { git branch -a --contains $1; }; f";
+      # Find tags containing commit
+      ft = "!f() { git describe --always --contains $1; }; f";
+      # Remove branches that have already been merged with main
+      dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d";
+      # List contributors with number of commits
+      contributors = "shortlog --summary --numbered";
+      # Show the user email for the current repository
+      whoami = "config user.email";
+      # Push a fresh branch to remote
+      pushup = "!git push --set-upstream origin `git symbolic-ref --short HEAD`";
+      pu = "pushup";
+      # Reset branch to last commit
+      fuck = "reset HEAD --hard";
+      # Show files ignored by git
+      ign = "ls-files -o -i --exclude-standard";
+      # Common shortcuts
+      st = "status";
+      ch = "checkout";
+      ck = "checkout";
+      chk = "checkout";
+      ci = "commit";
+      cp = "cherry-pick";
+      com = "checkout master";
+      br = "branch";
+      co = "checkout";
+      df = "diff";
+      dif = "diff";
+      dc = "diff --cached";
+      mg = "merge";
+      lg = "log -p";
+      lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
+      lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
+      ls = "ls-files";
+      up = "pull --rebase";
+      pul = "pull";
+      pulll = "pull";
     };
+
     extraConfig = {
-      init.defaultBranch = "main";
+      apply.whitespace = "fix";
+      branch.sort = "-committerdate";
       core = {
-	    editor = "vim";
+        whitespace = "space-before-tab,-indent-with-non-tab,trailing-space";
+        trustctime = false;
+        precomposeunicode = false;
+        untrackedCache = true;
+        editor = "vim";
         autocrlf = "input";
       };
-      commit.gpgsign = true;
-      pull.rebase = true;
-      rebase.autoStash = true;
+      color = {
+        ui = "auto";
+        branch = {
+          current = "yellow reverse";
+          local = "yellow";
+          remote = "green";
+        };
+        diff = {
+          meta = "yellow bold";
+          frag = "magenta bold";
+          old = "red";
+          new = "green";
+        };
+        status = {
+          added = "yellow";
+          changed = "green";
+          untracked = "cyan";
+        };
+      };
+      commit.gpgsign = false;
+      diff = {
+        renames = "copies";
+        bin.textconv = "hexdump -v -C";
+      };
+      help.autocorrect = 1;
+      merge.log = true;
+      pull.rebase = false;
+      push = {
+        default = "simple";
+        followTags = true;
+      };
+      url = {
+        "git@github.com:" = {
+          insteadOf = "gh:";
+          pushInsteadOf = [ "github:" "git://github.com/" ];
+        };
+        "git://github.com/" = {
+          insteadOf = "github:";
+        };
+        "git@gist.github.com:" = {
+          insteadOf = "gst:";
+          pushInsteadOf = [ "gist:" "git://gist.github.com/" ];
+        };
+        "git://gist.github.com/" = {
+          insteadOf = "gist:";
+        };
+      };
+      init.defaultBranch = "main";
+      filter.lfs = {
+        clean = "git-lfs clean -- %f";
+        smudge = "git-lfs smudge -- %f";
+        process = "git-lfs filter-process";
+        required = true;
+      };
     };
   };
 

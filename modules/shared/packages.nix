@@ -38,10 +38,10 @@ with pkgs; [
   # # meslo-lgs-nf
 
   # # # Node.js development tools
-  # nodePackages.pnpm # globally install npm
-  # nodePackages.npm # globally install npm
-  # nodePackages.prettier
   # nodePackages.eslint
+  nodePackages.npm # globally install npm
+  # nodePackages.pnpm
+  # nodePackages.prettier
   # nodePackages.yarn
   # nodejs
 
