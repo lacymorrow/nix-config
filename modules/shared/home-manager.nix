@@ -8,66 +8,105 @@ let name = "Lacy Morrow";
     enable = true;
     autocd = false;
     cdpath = [ "~/.local/share/src" ];
+    autosuggestion.enable = true;
+    enableCompletion = true;           # This is the correct option for zsh completion
+    
     plugins = [
       {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
-          name = "powerlevel10k-config";
-          src = lib.cleanSource ./config;
-          file = "p10k.zsh";
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./config;
+        file = "p10k.zsh";
+      }
+      {
+        name = "zsh-autosuggestions";
+        src = pkgs.zsh-autosuggestions;
+        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+      }
+      {
+        name = "zsh-syntax-highlighting";
+        src = pkgs.zsh-syntax-highlighting;
+        file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
       }
     ];
+
     initExtraFirst = ''
-      # # Source aliases file
-      # if [ -f ~/.aliases ]; then
-      #   source ~/.aliases
-      # fi
+      # Load completions
+      autoload -U +X bashcompinit && bashcompinit
+      autoload -U +X compinit && compinit
 
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       fi
 
-      # Define variables for directories
-      export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
-      export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
-      export PATH=$HOME/.local/share/bin:$PATH
+      # Path configurations
+      export PATH="$HOME/bin:$PATH"
+      export PATH="$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH"
+      export PATH="$HOME/.npm-packages/bin:$HOME/bin:$PATH"
+      export PATH="$HOME/.local/share/bin:$PATH"
+      export PATH="$HOME/.local/bin:$PATH"
 
-      # Remove history data we don't want to see
-      export HISTIGNORE="pwd:ls:cd"
+      # History configuration
+      export HISTIGNORE="pwd:ls:cd:exit:date:* --help"
+      export HISTSIZE=32768
+      export HISTFILESIZE=$HISTSIZE
 
-      # Emacs is my editor
+      # Editor configuration
       export ALTERNATE_EDITOR=""
       export EDITOR="emacsclient -t"
       export VISUAL="emacsclient -c -a emacs"
 
+      # Enable recursive globbing
+      setopt extended_glob
+
+      # Load Homebrew
+      if [ -f /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"  # Apple Silicon
+      elif [ -f /usr/local/bin/brew ]; then
+        eval "$(/usr/local/bin/brew shellenv)"     # Intel Mac
+      fi
+
+      # NVM configuration
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+      # Ngrok completions
+      if command -v ngrok &>/dev/null; then
+        eval "$(ngrok completion)"
+      fi
+
+      # Deno completions
+      fpath=(~/.zsh $fpath)
+
+      # Custom functions
       e() {
-          emacsclient -t "$@"
+        emacsclient -t "$@"
       }
 
-      # nix shortcuts
+      # Nix shortcuts
       shell() {
-          nix-shell '<nixpkgs>' -A "$1"
+        nix-shell '<nixpkgs>' -A "$1"
       }
+
+      # Add completions for common commands
+      if type _git &>/dev/null; then
+        complete -o default -o nospace -F _git g
+      fi
+
+      # SSH completions
+      if [ -e "$HOME/.ssh/config" ]; then
+        complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
+      fi
+
+      # Killall completions
+      complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari SystemUIServer Terminal" killall
     '';
-  };
-
-
-  # Add npm configuration
-  npm = {
-    enable = true;
-    package = pkgs.nodePackages.npm;
-    
-    # Your npmrc settings
-    config = {
-      init-author-name = name;
-      init-author-email = email;
-      init-author-url = "http://lacymorrow.com/";
-      init-license = "MIT";
-    };
   };
 
   git = {

@@ -20,4 +20,10 @@
   ".exports" = {
     text = builtins.readFile ../../home/.exports;
   };
+
+  ".npmrc" = {
+    text = builtins.readFile ../../home/.npmrc;
+  };
+
+  
 }
