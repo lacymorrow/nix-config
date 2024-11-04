@@ -22,6 +22,11 @@ let name = "Lacy Morrow";
       }
     ];
     initExtraFirst = ''
+      # Source aliases file
+      if [ -f ~/.aliases ]; then
+        source ~/.aliases
+      fi
+
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
@@ -34,9 +39,6 @@ let name = "Lacy Morrow";
 
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
-
-      # Ripgrep alias
-      alias search=rg -p --glob '!node_modules/*'  $@
 
       # Emacs is my editor
       export ALTERNATE_EDITOR=""
@@ -51,16 +53,6 @@ let name = "Lacy Morrow";
       shell() {
           nix-shell '<nixpkgs>' -A "$1"
       }
-
-      # pnpm is a javascript package manager
-      alias pn=pnpm
-      alias px=pnpx
-
-      # Use difftastic, syntax-aware diffing
-      alias diff=difft
-
-      # Always color ls and group directories
-      alias ls='ls --color=auto'
     '';
   };
 
