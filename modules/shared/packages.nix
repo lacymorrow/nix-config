@@ -1,64 +1,84 @@
 { pkgs }:
 
 with pkgs; [
-  # General packages for development and system management
+  # Terminal Emulators
   # alacritty
-  # # aspell
-  # # aspellDicts.en
-  # # bash-completion
-  # bat
-  # btop
-  # coreutils
-  # killall
-  # neofetch
-  # openssh
-  # sqlite
-  # wget
+
+  # Core CLI Tools
+  bat
+  coreutils
+  killall
+  tree
+  unzip
+  wget
   # zip
 
-  # # # Encryption and security tools
-  # # age
-  # # age-plugin-yubikey
-  # # gnupg
-  # # libfido2
-
-  # # # Cloud-related tools and SDKs
-  # docker
-  # docker-compose
-
-  # # # Media-related packages
-  # # emacs-all-the-icons-fonts
-  # # dejavu_fonts
-  # ffmpeg
-  # fd
-  # # font-awesome
-  # # hack-font
-  # # noto-fonts
-  # # noto-fonts-emoji
-  # # meslo-lgs-nf
-
-  # # # Node.js development tools
-  # nodePackages.eslint
-  nodePackages.npm # globally install npm
-  # nodePackages.pnpm
-  # nodePackages.prettier
-  # nodePackages.yarn
-  # nodejs
-
-  # # Text and terminal utilities
-  # htop
-  # hunspell
+  # Shell & Terminal Utilities
+  # bash-completion
+  # btop
+  fd
+  htop
   # iftop
-  # jetbrains-mono
-  # jq
-  # ripgrep
-  # tree
+  jq
+  # neofetch
+  ripgrep
   # tmux
   # unrar
-  # unzip
-  # zsh-powerlevel10k
+  zsh-powerlevel10k
 
-  # # Python packages
+  # Development Tools
+  docker
+  docker-compose
+  # mercurial
+  # socat
+  # watchman
+
+  # Node.js & JavaScript
+  nodejs
+  nodePackages.npm
+  nodePackages.pnpm
+  nodePackages.yarn
+  nodePackages.eslint
+  # nodePackages.prettier
+
+  # Python Development
   # python39
-  # python39Packages.virtualenv # globally install virtualenv
+  # python39Packages.virtualenv
+  # python
+  # python3
+
+  # Ruby Development
+  # ruby-build
+  # ruby
+
+  # Media & Image Processing
+  ffmpeg
+  imagemagick
+
+  # Security & Encryption
+  gnupg
+  openssh
+
+  # System Utilities
+  findutils
+  gawk
+  gnugrep
+  gnused
+  gnutar
+  # sqlite
+
+  # Text Processing & Spell Checking
+  # aspell
+  # aspellDicts.en
+  # hunspell
+
+  # Fonts & Typography
+  # dejavu_fonts
+  # emacs-all-the-icons-fonts
+  # font-awesome
+  # hack-font
+  # jetbrains-mono
+  # noto-fonts
+  # noto-fonts-emoji
+  # meslo-lgs-nf
 ]

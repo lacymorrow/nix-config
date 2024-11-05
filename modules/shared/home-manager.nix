@@ -106,6 +106,11 @@ let name = "Lacy Morrow";
 
       # Killall completions
       complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari SystemUIServer Terminal" killall
+
+      # Source docker aliases if file exists
+      if [ -f ~/.docker_aliases ]; then
+        source ~/.docker_aliases
+      fi
     '';
   };
 

@@ -8,6 +8,7 @@ in
 {
   imports = [
    ./dock
+   ./system-preferences.nix
   ];
 
   # It me
@@ -20,7 +21,19 @@ in
 
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap"; # Uninstall unmanaged packages
+      upgrade = true;
+    };
+    
     casks = pkgs.callPackage ./casks.nix {};
+    brews = pkgs.callPackage ./brews.nix {};
+    # taps = [
+    #   "homebrew/cask-versions"
+    #   "homebrew/services"
+    #   "buo/cask-upgrade"
+    # ];
     # onActivation.cleanup = "uninstall";
 
     # These app IDs are from using the mas CLI app
@@ -35,8 +48,11 @@ in
     # This message is safe to ignore. (https://github.com/dustinlyons/nixos-config/issues/83)
 
     masApps = {
-      "1password" = 1333542190;
-      "wireguard" = 1451685025;
+      # "1password" = 1333542190;
+      # "Amphetamine" = 937984704;
+      # "BetterSnapTool" = 417375580;
+      "Flycut" = 442160987;
+      # "wireguard" = 1451685025;
     };
   };
 
