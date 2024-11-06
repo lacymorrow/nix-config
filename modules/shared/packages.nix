@@ -81,4 +81,10 @@ with pkgs; [
   # noto-fonts
   # noto-fonts-emoji
   # meslo-lgs-nf
+
+  # Shell enhancements
+  starship    # Cross-shell prompt
+  zoxide      # Smarter cd command
+  nushell     # Modern shell alternative
+  asdf-vm    # Version manager
 ]

@@ -8,7 +8,6 @@ in
 {
   imports = [
    ./dock
-   ./system-preferences.nix
   ];
 
   # It me
@@ -82,6 +81,7 @@ in
     dock = {
       enable = true;
       entries = [
+        # Apps
         { path = "/Applications/Slack.app/"; }
         { path = "/System/Applications/Messages.app/"; }
         { path = "/System/Applications/Facetime.app/"; }
@@ -92,13 +92,20 @@ in
         { path = "/System/Applications/Photo Booth.app/"; }
         { path = "/System/Applications/TV.app/"; }
         { path = "/System/Applications/Home.app/"; }
+
+        # Folders - right side of dock
         {
-          path = "${config.users.users.${user}.home}/.local/share/";
+          path = "${config.users.users.${user}.home}/Applications";
           section = "others";
           options = "--sort name --view grid --display folder";
         }
         {
-          path = "${config.users.users.${user}.home}/.local/share/downloads";
+          path = "${config.users.users.${user}.home}/Documents";
+          section = "others";
+          options = "--sort name --view grid --display folder";
+        }
+        {
+          path = "${config.users.users.${user}.home}/Downloads";
           section = "others";
           options = "--sort name --view grid --display stack";
         }

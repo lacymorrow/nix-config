@@ -8,7 +8,8 @@ let user = "tmorrow.cont"; in
     ../../modules/darwin/secrets.nix
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
-     agenix.darwinModules.default
+    ../../modules/darwin/system-preferences.nix
+    agenix.darwinModules.default
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -45,8 +46,5 @@ let user = "tmorrow.cont"; in
 
   system = {
     stateVersion = 4;
-
-    # Import system preferences while overriding specific settings
-    defaults = (import ../../modules/darwin/system-preferences.nix { inherit config pkgs lib; }).system.defaults;
   };
 }

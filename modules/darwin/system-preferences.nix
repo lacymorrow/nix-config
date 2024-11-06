@@ -103,6 +103,8 @@
       GuestEnabled = false;
       # Don't show full name in login window
       SHOWFULLNAME = false;
+      LoginwindowLaunchesReopen = true;
+      TALLogoutSavesState = true;
     };
 
     # Trackpad settings
@@ -118,12 +120,12 @@
     };
 
     # Universal Access settings
-    # universalaccess = {
-    #   # Use scroll gesture with modifier key to zoom
-    #   closeViewScrollWheelToggle = true;
-    #   # Follow keyboard focus while zoomed in
-    #   closeViewZoomFollowsFocus = true;
-    # };
+    universalaccess = {
+      # Use scroll gesture with modifier key to zoom
+      closeViewScrollWheelToggle = true;
+      # Follow keyboard focus while zoomed in
+      closeViewZoomFollowsFocus = true;
+    };
 
     # Activity Monitor settings
     ActivityMonitor = {
@@ -237,10 +239,6 @@
     defaults write com.apple.TextEdit PlainTextEncoding -int 4
     defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
-    # Spotlight settings
-    sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-    sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
     # App Store settings
     defaults write com.apple.appstore WebKitDeveloperExtras -bool true
     defaults write com.apple.appstore ShowDebugMenu -bool true
@@ -250,13 +248,19 @@
     defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
     defaults write com.apple.commerce AutoUpdate -bool true
 
+    # Add Spectacle to Login Items
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spectacle.app", hidden:false}'
+
     # Kill affected applications
     /usr/bin/killall Finder
     /usr/bin/killall Dock
     /usr/bin/killall SystemUIServer
-    for app in "Activity Monitor" "Photos" "Safari" "SystemUIServer" "Terminal" "Transmission"; do
+    for app in "Activity Monitor" "Photos" "Safari" "SystemUIServer" "Terminal" "Transmission" "Spectacle"; do
       killall "$app" > /dev/null 2>&1 || true
     done
+
+    # Start Spectacle
+    open -a Spectacle
 
     # Spotlight settings
     sudo mdutil -i off "/Volumes/Macintosh HD" 2>/dev/null  # Disable indexing
@@ -268,12 +272,6 @@
     sudo pmset -a autopoweroff 0
     sudo pmset -a standby 0
     sudo pmset -a proximitywake 0
-
-    # Network settings
-    sudo networksetup -setairportpower en0 on
-    
-    # Disable the sound effects on boot
-    sudo nvram SystemAudioVolume=" "
 
     # Expand save panel by default
     defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -295,10 +293,6 @@
     # Stop iTunes from responding to keyboard media keys
     launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
 
-    # Require password immediately after sleep or screen saver begins
-    defaults write com.apple.screensaver askForPassword -int 1
-    defaults write com.apple.screensaver askForPasswordDelay -int 0
-
     # Save screenshots to the desktop
     defaults write com.apple.screencapture location -string "$HOME/Desktop"
 
@@ -311,5 +305,19 @@
 
     # Show the /Volumes folder
     sudo chflags nohidden /Volumes
+
+    # # Require password immediately after sleep or screen saver begins
+    # defaults write com.apple.screensaver askForPassword -int 1
+    # defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+    # # Network settings
+    # sudo networksetup -setairportpower en0 on || true
+    
+    # # Disable the sound effects on boot
+    # sudo nvram SystemAudioVolume=" "
+
+    # # Spotlight settings
+    # sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+    # sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
   '';
 } 

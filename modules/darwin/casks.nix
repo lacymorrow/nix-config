@@ -2,23 +2,27 @@ _:
 
 [
   # Development Tools
-  "homebrew/cask/docker"
-  "visual-studio-code"
-  "postman"
+  # "homebrew/cask/docker"
+  # "visual-studio-code"
   "ngrok"
-  "warp"
-  "iterm2"
+  # "postman"
+  # "warp"
+  # "iterm2"
   "dash"
   # "atom"
   # "brackets"
   # "chefdk"
   # "chromedriver"
   # "codekit"
+  # "docker"        # Keep as cask (due to special system integration)
+  # "google-chrome" # Keep as cask (due to auto-updates)
+  # "warp"         # Keep as cask (not in nixpkgs)
+  # "spectacle"    # Keep as cask (not in nixpkgs)
 
   # Communication Tools
   "discord"
   # "notion"
-  "slack"
+  # "slack"
   # "telegram"
   "zoom"
 
@@ -32,11 +36,11 @@ _:
 
   # Entertainment Tools
   "vlc"
-  "spotify"
+  # "spotify"
   "transmission"
 
   # Browsers
-  "google-chrome"
+  # "google-chrome"
   "firefox"
 
   # Creative Tools
@@ -46,7 +50,7 @@ _:
   # Virtualization
   # "vagrant"
   "virtualbox"
-  "docker"
+  # "docker"
   "vmware-fusion"
 
   # System Tools
@@ -66,3 +70,12 @@ _:
   "syntax-highlight"
   "qlvideo"
 ]
+  # "docker"
+  # "google-chrome"
+  # "visual-studio-code"
+# "postman"
+  # "warp"
+  # "iterm2"
+  # "slack"
+  # "spotify"
+  # "spectacle"

@@ -111,6 +111,24 @@ let name = "Lacy Morrow";
       if [ -f ~/.docker_aliases ]; then
         source ~/.docker_aliases
       fi
+
+      # Initialize asdf
+      . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
+
+      # Add Node.js plugin and set defaults
+      asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+      asdf install nodejs latest
+      asdf global nodejs latest
+
+      # Initialize zoxide
+      eval "$(zoxide init zsh)"
+
+      # Initialize starship prompt
+      eval "$(starship init zsh)"
+
+      # Node.js configuration
+      export NODE_VERSIONS="$HOME/.asdf/installs/nodejs"
+      export NODE_VERSION_PREFIX="v"
     '';
   };
 
@@ -538,3 +556,41 @@ let name = "Lacy Morrow";
       '';
     };
 }
+
+programs.nushell = {
+  enable = true;
+  
+  # Configure environment
+  environmentVariables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+    PATH = "$HOME/.local/bin:$PATH";
+  };
+
+  extraEnv = ''
+    # Load custom environment variables
+    let-env PATH = ($env.PATH | split row (char esep) | prepend "~/.local/bin")
+    
+    # Set custom environment variables
+    let-env STARSHIP_SHELL = "nu"
+    let-env EDITOR = "vim"
+    let-env VISUAL = "vim"
+  '';
+
+  extraConfig = ''
+    # Basic nushell configuration
+    let-env config = {
+      show_banner: false
+      completions: {
+        case_sensitive: false
+        quick: true
+        partial: true
+        algorithm: "prefix"
+      }
+      keybindings: []
+      
+      # Hook up starship prompt
+      prompt: (starship prompt)
+    }
+  '';
+};

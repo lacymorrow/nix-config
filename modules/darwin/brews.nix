@@ -12,7 +12,7 @@ _:
   
   # System Tools
   # "awscli"
-  "caffeine"
+  # "caffeine"
   # "cmake"
   # "composer"
   # "curl"
@@ -29,7 +29,7 @@ _:
   # "libxmlsec1"
   "rpm"
   "snapcraft"
-  "wine"
+  # "wine"
   "zlib"
   
   # Shell Enhancements (macOS specific versions)
