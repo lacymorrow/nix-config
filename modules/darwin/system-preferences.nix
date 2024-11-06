@@ -29,7 +29,10 @@
       # Don't show only open applications
       static-only = false;
       # Set the icon size of Dock items
-      tilesize = 36;
+      tilesize = 48;
+
+      # Additional settings from host config
+      launchanim = true;
     };
 
     # Finder settings
@@ -85,8 +88,13 @@
       # Enable corner secondary click
       "com.apple.trackpad.trackpadCornerClickBehavior" = 1;
       # Set keyboard repeat rate (lower is faster)
-      InitialKeyRepeat = 20;
-      KeyRepeat = 5;
+      InitialKeyRepeat = 15;
+      KeyRepeat = 2;
+
+      # Additional settings from default.nix
+      "com.apple.mouse.tapBehavior" = 1;
+      "com.apple.sound.beep.volume" = 0.0;
+      "com.apple.sound.beep.feedback" = 0;
     };
 
     # Login window settings
@@ -110,19 +118,19 @@
     };
 
     # Universal Access settings
-    universalaccess = {
-      # Use scroll gesture with modifier key to zoom
-      closeViewScrollWheelToggle = true;
-      # Follow keyboard focus while zoomed in
-      closeViewZoomFollowsFocus = true;
-    };
+    # universalaccess = {
+    #   # Use scroll gesture with modifier key to zoom
+    #   closeViewScrollWheelToggle = true;
+    #   # Follow keyboard focus while zoomed in
+    #   closeViewZoomFollowsFocus = true;
+    # };
 
     # Activity Monitor settings
     ActivityMonitor = {
       # Show the main window when launching
       OpenMainWindow = true;
       # Show all processes
-      ShowCategory = 0;
+      ShowCategory = 100;
       # Sort by CPU usage
       SortColumn = "CPUUsage";
       SortDirection = 0;
