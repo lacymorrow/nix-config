@@ -8,7 +8,6 @@ let user = "tmorrow.cont"; in
     ../../modules/darwin/secrets.nix
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
-    ../../modules/darwin/system-preferences.nix
     agenix.darwinModules.default
   ];
 

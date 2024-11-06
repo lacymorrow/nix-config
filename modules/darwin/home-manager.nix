@@ -8,6 +8,7 @@ in
 {
   imports = [
    ./dock
+   ./system-preferences
   ];
 
   # It me
