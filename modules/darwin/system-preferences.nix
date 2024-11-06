@@ -97,15 +97,15 @@
       "com.apple.sound.beep.feedback" = 0;
     };
 
-    # Login window settings
-    loginwindow = {
-      # Disable guest account
-      GuestEnabled = false;
-      # Don't show full name in login window
-      SHOWFULLNAME = false;
-      LoginwindowLaunchesReopen = true;
-      TALLogoutSavesState = true;
-    };
+    # # Login window settings
+    # loginwindow = {
+    #   # Disable guest account
+    #   GuestEnabled = false;
+    #   # Don't show full name in login window
+    #   SHOWFULLNAME = false;
+    #   LoginwindowLaunchesReopen = true;
+    #   TALLogoutSavesState = true;
+    # };
 
     # Trackpad settings
     trackpad = {
