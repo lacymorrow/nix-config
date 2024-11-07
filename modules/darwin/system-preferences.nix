@@ -178,31 +178,31 @@
       # ApplePressAndHoldEnabled = false;  # Disable press-and-hold for keys
     };
 
-    # QuickTime settings
-    "com.apple.QuickTimePlayerX" = {
-      # MGPlayMovieOnOpen = true;  # Auto-play videos when opened
-    };
+    # # QuickTime settings
+    # "com.apple.QuickTimePlayerX" = {
+    #   MGPlayMovieOnOpen = true;  # Auto-play videos when opened
+    # };
 
-    # Disk Utility settings
-    "com.apple.DiskUtility" = {
-      DUDebugMenuEnabled = true;  # Enable debug menu
-      "advanced-image-options" = true;  # Show advanced options
-    };
+    # # Disk Utility settings
+    # "com.apple.DiskUtility" = {
+    #   DUDebugMenuEnabled = true;  # Enable debug menu
+    #   "advanced-image-options" = true;  # Show advanced options
+    # };
 
-    # Photos settings
-    "com.apple.ImageCapture" = {
-      disableHotPlug = true;  # Prevent Photos from opening automatically when devices are plugged in
-    };
+    # # Photos settings
+    # "com.apple.ImageCapture" = {
+    #   disableHotPlug = true;  # Prevent Photos from opening automatically when devices are plugged in
+    # };
 
-    # Chrome additional settings
-    "com.google.Chrome" = {
-      AppleEnableMouseSwipeNavigateWithScrolls = false;  # Disable mouse swipe navigation
-    };
+    # # Chrome additional settings
+    # "com.google.Chrome" = {
+    #   AppleEnableMouseSwipeNavigateWithScrolls = false;  # Disable mouse swipe navigation
+    # };
 
-    # Print settings
-    "com.apple.print.PrintingPrefs" = {
-      "Quit When Finished" = true;  # Automatically quit printer app
-    };
+    # # Print settings
+    # "com.apple.print.PrintingPrefs" = {
+    #   "Quit When Finished" = true;  # Automatically quit printer app
+    # };
 
     # # Help Viewer settings
     # "com.apple.helpviewer" = {
@@ -216,215 +216,255 @@
     # };
   };
 
-  # Spectacle settings
-  system.defaults."com.divisiblebyzero.Spectacle" = {
-    # Common shortcuts
-    # "MoveToCenter" = "@$u";              # cmd + opt + u
-    "MoveToFullscreen" = "^@$space";     # ctrl + cmd + opt + space
-    # "MoveToLeftHalf" = "@$h";            # cmd + opt + h
-    # "MoveToRightHalf" = "@$l";           # cmd + opt + l
-    # "MoveToTopHalf" = "@$k";             # cmd + opt + k
-    # "MoveToBottomHalf" = "@$j";          # cmd + opt + j
-    # "MoveToUpperLeft" = "@$1";           # cmd + opt + 1
-    # "MoveToLowerLeft" = "@$3";           # cmd + opt + 3
-    # "MoveToUpperRight" = "@$2";          # cmd + opt + 2
-    # "MoveToLowerRight" = "@$4";          # cmd + opt + 4
+  # # Custom system defaults (for apps)
+  # system.defaults.CustomSystemDefaults = {
+  #   "com.divisiblebyzero.Spectacle" = {
+  #     MoveToFullscreen = "^@$space";     # ctrl + cmd + opt + space
+  #     StatusItemEnabled = 1;              # Show in menu bar
+  #     WindowSnapping = 1;                 # Enable window snapping
+  #   };
+  # };
+
+  # # Or alternatively, use system.activationScripts
+  # system.activationScripts.postActivation.text = ''
+  #   # Spectacle settings
+  #   defaults write com.divisiblebyzero.Spectacle MoveToFullscreen -string "^@\$space"
+  #   defaults write com.divisiblebyzero.Spectacle StatusItemEnabled -int 1
+  #   defaults write com.divisiblebyzero.Spectacle WindowSnapping -int 1
+  # '';
+
+  # # Warp Terminal settings
+  # system.defaults."dev.warp.Warp-Stable" = {
+  #   "AutomaticUpdatePolicy" = 1;              # Check for updates automatically
+  #   "WelcomeScreenShown" = 1;                 # Don't show welcome screen
+  #   "ShowTips" = 0;                           # Don't show tips
+  #   # "HonorPS1" = 1;                          # Honor PS1 environment variable
+  #   "FontSize" = 14;                         # Font size
+  #   "Theme" = "dark";                        # Theme setting
+  # };
+
+  # # Cursor settings
+  # system.defaults."com.todesktop.230313mzl4w4u5.cursor" = {
+  #   "AutomaticUpdatePolicy" = 1;             # Check for updates automatically
+  #   "ShowWelcomeScreen" = 0;                 # Don't show welcome screen
+  #   "Theme" = "dark";                        # Theme setting
+  # };
+
+  # # Zoom settings
+  # system.defaults."us.zoom.xos" = {
+  #   "AutoJoinAudio" = 1;                     # Auto-join audio
+  #   "MuteVBOnJoin" = 1;                      # Mute on join
+  #   "TurnOffAirPlayOnJoin" = 1;              # Turn off AirPlay on join
+  #   "ZAutoEnterFullScreen" = 0;              # Don't auto-enter full screen
+  #   "ZAutoFitWndToScreen" = 1;               # Auto-fit window to screen
+  #   "ZShowMeetingTime" = 1;                  # Show meeting time
+  #   "enableAlwaysShowMeetingControls" = 1;   # Always show meeting controls
+  #   "enableHDVideo" = 1;                     # Enable HD video
+  #   "enableOrigianalSound" = 1;              # Enable original sound
+  # };
+
+  # # System-wide settings that require scripting
+  # system.activationScripts.postUserActivation.text = ''
+  #   echo "Setting system-wide defaults..."
+
+  #   # Show all mounted volumes on desktop
+  #   defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+  #   defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+  #   defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+  #   defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+  #   # Disable the "Are you sure you want to open this application?" dialog
+  #   defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+  #   # Disable disk image verification
+  #   defaults write com.apple.frameworks.diskimages skip-verify -bool true
+  #   defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+  #   defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
+  #   # Hot corners
+  #   # Possible values:
+  #   #  0: no-op
+  #   #  2: Mission Control
+  #   #  3: Show application windows
+  #   #  4: Desktop
+  #   #  5: Start screen saver
+  #   #  6: Disable screen saver
+  #   #  7: Dashboard
+  #   # 10: Put display to sleep
+  #   # 11: Launchpad
+  #   # 12: Notification Center
+  #   defaults write com.apple.dock wvous-tl-corner -int 2
+  #   defaults write com.apple.dock wvous-tr-corner -int 4
+  #   defaults write com.apple.dock wvous-bl-corner -int 5
+  #   defaults write com.apple.dock wvous-br-corner -int 12
+
+  #   # Transmission settings
+  #   defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
+  #   defaults write org.m0k.transmission IncompleteDownloadFolder -string "$HOME/Documents/Torrents"
+  #   defaults write org.m0k.transmission DownloadLocationConstant -bool true
+  #   defaults write org.m0k.transmission DownloadAsk -bool false
+  #   defaults write org.m0k.transmission MagnetOpenAsk -bool false
+  #   defaults write org.m0k.transmission BlocklistNew -bool true
+  #   defaults write org.m0k.transmission BlocklistURL -string "http://john.bitsurge.net/public/biglist.p2p.gz"
+  #   defaults write org.m0k.transmission BlocklistAutoUpdate -bool true
+  #   defaults write org.m0k.transmission RandomPort -bool true
+
+  #   # Chrome settings
+  #   defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+  #   defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+  #   defaults write com.google.Chrome DisablePrintPreview -bool true
+  #   defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
+
+  #   # Terminal settings
+  #   defaults write com.apple.terminal StringEncodings -array 4
+  #   defaults write com.apple.terminal SecureKeyboardEntry -bool true
+  #   defaults write com.apple.Terminal ShowLineMarks -int 0
+
+  #   # TextEdit settings
+  #   defaults write com.apple.TextEdit RichText -int 0
+  #   defaults write com.apple.TextEdit PlainTextEncoding -int 4
+  #   defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+  #   # App Store settings
+  #   defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+  #   defaults write com.apple.appstore ShowDebugMenu -bool true
+  #   defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+  #   defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+  #   defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+  #   defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+  #   defaults write com.apple.commerce AutoUpdate -bool true
+
+  #   echo "Setting Spotlight settings..."
+
+  #   # Spotlight settings
+  #   sudo mdutil -i off "/Volumes/Macintosh HD" 2>/dev/null  # Disable indexing
+  #   sudo mdutil -E "/Volumes/Macintosh HD" 2>/dev/null      # Erase index
+  #   sudo mdutil -i on "/Volumes/Macintosh HD" 2>/dev/null   # Enable indexing
+
+  #   # Energy saving
+  #   sudo pmset -a hibernatemode 0
+  #   sudo pmset -a autopoweroff 0
+  #   sudo pmset -a standby 0
+  #   sudo pmset -a proximitywake 0
+
+  #   # Expand save panel by default
+  #   defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+  #   defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+  #   # Disable automatic termination of inactive apps
+  #   defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+
+  #   # Disable automatic capitalization
+  #   defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+  #   # Disable smart quotes and dashes
+  #   defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+  #   defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+  #   # Disable auto-correct
+  #   defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+  #   # Stop iTunes from responding to keyboard media keys
+  #   launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
+
+  #   # Save screenshots to the desktop
+  #   defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+  #   # Avoid creating .DS_Store files on network or USB volumes
+  #   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  #   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+  #   echo "Setting Library and Volumes folders..."
+
+  #   # Show the ~/Library folder
+  #   chflags nohidden ~/Library
+
+  #   # Show the /Volumes folder
+  #   sudo chflags nohidden /Volumes
+
+  #   # Add Spectacle to Login Items
+  #   osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
+  #   osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spectacle.app", hidden:false}'
+
+  #   echo "Killing affected applications..."
+
+  #   # Kill affected applications
+  #   /usr/bin/killall Finder
+  #   /usr/bin/killall Dock
+  #   /usr/bin/killall SystemUIServer
+  #   for app in "Activity Monitor" "Photos" "Safari" "SystemUIServer" "Terminal" "Transmission" "Spectacle" "Raycast"; do
+  #     killall "$app" > /dev/null 2>&1 || true
+  #   done
+
+  #   echo "Starting Spectacle..."
+
+  #   # Start Spectacle
+  #   open -a Spectacle
+
+  #   # # Require password immediately after sleep or screen saver begins
+  #   # defaults write com.apple.screensaver askForPassword -int 1
+  #   # defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+  #   # # Network settings
+  #   # sudo networksetup -setairportpower en0 on || true
     
-    # Additional settings
-    "StatusItemEnabled" = 1;              # Show in menu bar
-    # "FullscreenWindowWidth" = "1440";    # Width for fullscreen windows
-    "WindowSnapping" = 1;                 # Enable window snapping
-  };
+  #   # # Disable the sound effects on boot
+  #   # sudo nvram SystemAudioVolume=" "
 
-  # Warp Terminal settings
-  system.defaults."dev.warp.Warp-Stable" = {
-    "AutomaticUpdatePolicy" = 1;              # Check for updates automatically
-    "WelcomeScreenShown" = 1;                 # Don't show welcome screen
-    "ShowTips" = 0;                           # Don't show tips
-    # "HonorPS1" = 1;                          # Honor PS1 environment variable
-    "FontSize" = 14;                         # Font size
-    "Theme" = "dark";                        # Theme setting
-  };
+  #   # # Spotlight settings
+  #   # sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+  #   # sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
-  # Cursor settings
-  system.defaults."com.todesktop.230313mzl4w4u5.cursor" = {
-    "AutomaticUpdatePolicy" = 1;             # Check for updates automatically
-    "ShowWelcomeScreen" = 0;                 # Don't show welcome screen
-    "Theme" = "dark";                        # Theme setting
-  };
+  #   # Remove duplicates in the "Open With" menu
+  #   # /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+  # '';
 
-  # Zoom settings
-  system.defaults."us.zoom.xos" = {
-    "AutoJoinAudio" = 1;                     # Auto-join audio
-    "MuteVBOnJoin" = 1;                      # Mute on join
-    "TurnOffAirPlayOnJoin" = 1;              # Turn off AirPlay on join
-    "ZAutoEnterFullScreen" = 0;              # Don't auto-enter full screen
-    "ZAutoFitWndToScreen" = 1;               # Auto-fit window to screen
-    "ZShowMeetingTime" = 1;                  # Show meeting time
-    "enableAlwaysShowMeetingControls" = 1;   # Always show meeting controls
-    "enableHDVideo" = 1;                     # Enable HD video
-    "enableOrigianalSound" = 1;              # Enable original sound
-  };
+  # # VSCode settings
+  # system.defaults."com.microsoft.VSCode" = {
+  #   "ApplePressAndHoldEnabled" = false;      # Enable key repeat for VSCode
+  #   "AutoUpdate" = true;                     # Enable auto-updates
+  #   "ShowWelcome" = 0;                       # Don't show welcome screen
+  #   "NSNavLastRootDirectory" = "~/repo";     # Default directory
+  # };
 
-  # System-wide settings that require scripting
-  system.activationScripts.postUserActivation.text = ''
-    # Show all mounted volumes on desktop
-    defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-    defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-    defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-    defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+  # # VSCode Workspace settings
+  # # system.defaults."com.microsoft.VSCode.WorkspaceStorageService" = {};
 
-    # Disable the "Are you sure you want to open this application?" dialog
-    defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-    # Disable disk image verification
-    defaults write com.apple.frameworks.diskimages skip-verify -bool true
-    defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-    defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
-    # Hot corners
-    # Possible values:
-    #  0: no-op
-    #  2: Mission Control
-    #  3: Show application windows
-    #  4: Desktop
-    #  5: Start screen saver
-    #  6: Disable screen saver
-    #  7: Dashboard
-    # 10: Put display to sleep
-    # 11: Launchpad
-    # 12: Notification Center
-    defaults write com.apple.dock wvous-tl-corner -int 2
-    defaults write com.apple.dock wvous-tr-corner -int 4
-    defaults write com.apple.dock wvous-bl-corner -int 5
-    defaults write com.apple.dock wvous-br-corner -int 12
-
-    # Transmission settings
-    defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-    defaults write org.m0k.transmission IncompleteDownloadFolder -string "$HOME/Documents/Torrents"
-    defaults write org.m0k.transmission DownloadLocationConstant -bool true
-    defaults write org.m0k.transmission DownloadAsk -bool false
-    defaults write org.m0k.transmission MagnetOpenAsk -bool false
-    defaults write org.m0k.transmission BlocklistNew -bool true
-    defaults write org.m0k.transmission BlocklistURL -string "http://john.bitsurge.net/public/biglist.p2p.gz"
-    defaults write org.m0k.transmission BlocklistAutoUpdate -bool true
-    defaults write org.m0k.transmission RandomPort -bool true
-
-    # Chrome settings
-    defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-    defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-    defaults write com.google.Chrome DisablePrintPreview -bool true
-    defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
-
-    # Terminal settings
-    defaults write com.apple.terminal StringEncodings -array 4
-    defaults write com.apple.terminal SecureKeyboardEntry -bool true
-    defaults write com.apple.Terminal ShowLineMarks -int 0
-
-    # TextEdit settings
-    defaults write com.apple.TextEdit RichText -int 0
-    defaults write com.apple.TextEdit PlainTextEncoding -int 4
-    defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-
-    # App Store settings
-    defaults write com.apple.appstore WebKitDeveloperExtras -bool true
-    defaults write com.apple.appstore ShowDebugMenu -bool true
-    defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-    defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
-    defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
-    defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
-    defaults write com.apple.commerce AutoUpdate -bool true
-
-    # Spotlight settings
-    sudo mdutil -i off "/Volumes/Macintosh HD" 2>/dev/null  # Disable indexing
-    sudo mdutil -E "/Volumes/Macintosh HD" 2>/dev/null      # Erase index
-    sudo mdutil -i on "/Volumes/Macintosh HD" 2>/dev/null   # Enable indexing
-
-    # Energy saving
-    sudo pmset -a hibernatemode 0
-    sudo pmset -a autopoweroff 0
-    sudo pmset -a standby 0
-    sudo pmset -a proximitywake 0
-
-    # Expand save panel by default
-    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-
-    # Disable automatic termination of inactive apps
-    defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-
-    # Disable automatic capitalization
-    defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-
-    # Disable smart quotes and dashes
-    defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-    defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-    # Disable auto-correct
-    defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-    # Stop iTunes from responding to keyboard media keys
-    launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
-
-    # Save screenshots to the desktop
-    defaults write com.apple.screencapture location -string "$HOME/Desktop"
-
-    # Avoid creating .DS_Store files on network or USB volumes
-    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-    defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-    # Show the ~/Library folder
-    chflags nohidden ~/Library
-
-    # Show the /Volumes folder
-    sudo chflags nohidden /Volumes
-
-    # Add Spectacle to Login Items
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spectacle.app", hidden:false}'
-
-    # Kill affected applications
-    /usr/bin/killall Finder
-    /usr/bin/killall Dock
-    /usr/bin/killall SystemUIServer
-    for app in "Activity Monitor" "Photos" "Safari" "SystemUIServer" "Terminal" "Transmission" "Spectacle" "Raycast"; do
-      killall "$app" > /dev/null 2>&1 || true
-    done
-
-    # Start Spectacle
-    open -a Spectacle
-
-    # # Require password immediately after sleep or screen saver begins
-    # defaults write com.apple.screensaver askForPassword -int 1
-    # defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-    # # Network settings
-    # sudo networksetup -setairportpower en0 on || true
-    
-    # # Disable the sound effects on boot
-    # sudo nvram SystemAudioVolume=" "
-
-    # # Spotlight settings
-    # sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-    # sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
-    # Remove duplicates in the "Open With" menu
-    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-  '';
-
-  # VSCode settings
-  system.defaults."com.microsoft.VSCode" = {
-    "ApplePressAndHoldEnabled" = false;      # Enable key repeat for VSCode
-    "AutoUpdate" = true;                     # Enable auto-updates
-    "ShowWelcome" = 0;                       # Don't show welcome screen
-    "NSNavLastRootDirectory" = "~/repo";     # Default directory
-  };
-
-  # VSCode Workspace settings
-  # system.defaults."com.microsoft.VSCode.WorkspaceStorageService" = {};
-
-  # VSCode Crash Reporter
-  system.defaults."com.microsoft.VSCode.CrashReporter" = {
-    "DisableCrashReporter" = true;           # Disable crash reporter
-  };
+  # # VSCode Crash Reporter
+  # system.defaults."com.microsoft.VSCode.CrashReporter" = {
+  #   "DisableCrashReporter" = true;           # Disable crash reporter
+  # };
 } 
+
+      #   # Override with host-specific settings
+      #   NSGlobalDomain = {
+      #     AppleShowAllExtensions = true;
+      #     ApplePressAndHoldEnabled = false;
+
+      #     # 120, 90, 60, 30, 12, 6, 2
+      #     KeyRepeat = 2;
+
+      #     # 120, 94, 68, 35, 25, 15
+      #     InitialKeyRepeat = 15;
+
+      #     "com.apple.mouse.tapBehavior" = 1;
+      #     "com.apple.sound.beep.volume" = 0.0;
+      #     "com.apple.sound.beep.feedback" = 0;
+      #   };
+
+      #   dock = {
+      #     autohide = false;
+      #     show-recents = false;
+      #     launchanim = true;
+      #     orientation = "bottom";
+      #     tilesize = 48;
+      #   };
+
+      #   finder = {
+      #     _FXShowPosixPathInTitle = false;
+      #   };
+
+      #   trackpad = {
+      #     Clicking = true;
+      #     TrackpadThreeFingerDrag = true;
+      #   };
