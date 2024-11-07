@@ -11,6 +11,7 @@ _:
   "gnutls"
   
   # System Tools
+  # "google-cloud-sdk"
   # "awscli"
   # "caffeine"
   # "cmake"

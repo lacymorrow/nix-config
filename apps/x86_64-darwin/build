@@ -12,19 +12,15 @@ FLAKE_SYSTEM="darwinConfigurations.${SYSTEM_TYPE}.system"
 export TMPDIR="$HOME/.nixbuild-tmp"
 mkdir -p "$TMPDIR"
 
-# Ensure these environment variables are set
 export NIXPKGS_ALLOW_UNFREE=1
-export USER=$(whoami)
-export HOME="/Users/$USER"
 
 echo "${YELLOW}Starting build...${NC}"
-# Remove sudo, add --impure flag
 nix --extra-experimental-features 'nix-command flakes' \
     build \
     --impure \
-    -L \
+    -vvvv \
     --show-trace \
-    # --option sandbox false \
+    --option sandbox false \
     .#$FLAKE_SYSTEM $@
 
 echo "${YELLOW}Cleaning up...${NC}"
