@@ -82,7 +82,7 @@
       PMPrintingExpandedStateForPrint = true;
       PMPrintingExpandedStateForPrint2 = true;
       # Disable "natural" scrolling
-      "com.apple.swipescrolldirection" = false;
+      # "com.apple.swipescrolldirection" = false;
       # Enable tap to click
       "com.apple.trackpad.enableSecondaryClick" = true;
       # Enable corner secondary click
@@ -175,8 +175,95 @@
       NSDisableAutomaticTermination = true;
       
       # Keyboard settings
-      ApplePressAndHoldEnabled = false;  # Disable press-and-hold for keys
+      # ApplePressAndHoldEnabled = false;  # Disable press-and-hold for keys
     };
+
+    # QuickTime settings
+    "com.apple.QuickTimePlayerX" = {
+      # MGPlayMovieOnOpen = true;  # Auto-play videos when opened
+    };
+
+    # Disk Utility settings
+    "com.apple.DiskUtility" = {
+      DUDebugMenuEnabled = true;  # Enable debug menu
+      "advanced-image-options" = true;  # Show advanced options
+    };
+
+    # Photos settings
+    "com.apple.ImageCapture" = {
+      disableHotPlug = true;  # Prevent Photos from opening automatically when devices are plugged in
+    };
+
+    # Chrome additional settings
+    "com.google.Chrome" = {
+      AppleEnableMouseSwipeNavigateWithScrolls = false;  # Disable mouse swipe navigation
+    };
+
+    # Print settings
+    "com.apple.print.PrintingPrefs" = {
+      "Quit When Finished" = true;  # Automatically quit printer app
+    };
+
+    # # Help Viewer settings
+    # "com.apple.helpviewer" = {
+    #   DevMode = true;  # Set Help Viewer windows to non-floating mode
+    # };
+
+    # # Desktop Services settings
+    # "com.apple.desktopservices" = {
+    #   DSDontWriteNetworkStores = true;  # Avoid .DS_Store on network volumes
+    #   DSDontWriteUSBStores = true;      # Avoid .DS_Store on USB volumes
+    # };
+  };
+
+  # Spectacle settings
+  system.defaults."com.divisiblebyzero.Spectacle" = {
+    # Common shortcuts
+    # "MoveToCenter" = "@$u";              # cmd + opt + u
+    "MoveToFullscreen" = "^@$space";     # ctrl + cmd + opt + space
+    # "MoveToLeftHalf" = "@$h";            # cmd + opt + h
+    # "MoveToRightHalf" = "@$l";           # cmd + opt + l
+    # "MoveToTopHalf" = "@$k";             # cmd + opt + k
+    # "MoveToBottomHalf" = "@$j";          # cmd + opt + j
+    # "MoveToUpperLeft" = "@$1";           # cmd + opt + 1
+    # "MoveToLowerLeft" = "@$3";           # cmd + opt + 3
+    # "MoveToUpperRight" = "@$2";          # cmd + opt + 2
+    # "MoveToLowerRight" = "@$4";          # cmd + opt + 4
+    
+    # Additional settings
+    "StatusItemEnabled" = 1;              # Show in menu bar
+    # "FullscreenWindowWidth" = "1440";    # Width for fullscreen windows
+    "WindowSnapping" = 1;                 # Enable window snapping
+  };
+
+  # Warp Terminal settings
+  system.defaults."dev.warp.Warp-Stable" = {
+    "AutomaticUpdatePolicy" = 1;              # Check for updates automatically
+    "WelcomeScreenShown" = 1;                 # Don't show welcome screen
+    "ShowTips" = 0;                           # Don't show tips
+    # "HonorPS1" = 1;                          # Honor PS1 environment variable
+    "FontSize" = 14;                         # Font size
+    "Theme" = "dark";                        # Theme setting
+  };
+
+  # Cursor settings
+  system.defaults."com.todesktop.230313mzl4w4u5.cursor" = {
+    "AutomaticUpdatePolicy" = 1;             # Check for updates automatically
+    "ShowWelcomeScreen" = 0;                 # Don't show welcome screen
+    "Theme" = "dark";                        # Theme setting
+  };
+
+  # Zoom settings
+  system.defaults."us.zoom.xos" = {
+    "AutoJoinAudio" = 1;                     # Auto-join audio
+    "MuteVBOnJoin" = 1;                      # Mute on join
+    "TurnOffAirPlayOnJoin" = 1;              # Turn off AirPlay on join
+    "ZAutoEnterFullScreen" = 0;              # Don't auto-enter full screen
+    "ZAutoFitWndToScreen" = 1;               # Auto-fit window to screen
+    "ZShowMeetingTime" = 1;                  # Show meeting time
+    "enableAlwaysShowMeetingControls" = 1;   # Always show meeting controls
+    "enableHDVideo" = 1;                     # Enable HD video
+    "enableOrigianalSound" = 1;              # Enable original sound
   };
 
   # System-wide settings that require scripting
@@ -248,20 +335,6 @@
     defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
     defaults write com.apple.commerce AutoUpdate -bool true
 
-    # Add Spectacle to Login Items
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spectacle.app", hidden:false}'
-
-    # Kill affected applications
-    /usr/bin/killall Finder
-    /usr/bin/killall Dock
-    /usr/bin/killall SystemUIServer
-    for app in "Activity Monitor" "Photos" "Safari" "SystemUIServer" "Terminal" "Transmission" "Spectacle"; do
-      killall "$app" > /dev/null 2>&1 || true
-    done
-
-    # Start Spectacle
-    open -a Spectacle
-
     # Spotlight settings
     sudo mdutil -i off "/Volumes/Macintosh HD" 2>/dev/null  # Disable indexing
     sudo mdutil -E "/Volumes/Macintosh HD" 2>/dev/null      # Erase index
@@ -306,6 +379,21 @@
     # Show the /Volumes folder
     sudo chflags nohidden /Volumes
 
+    # Add Spectacle to Login Items
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spectacle.app", hidden:false}'
+
+    # Kill affected applications
+    /usr/bin/killall Finder
+    /usr/bin/killall Dock
+    /usr/bin/killall SystemUIServer
+    for app in "Activity Monitor" "Photos" "Safari" "SystemUIServer" "Terminal" "Transmission" "Spectacle" "Raycast"; do
+      killall "$app" > /dev/null 2>&1 || true
+    done
+
+    # Start Spectacle
+    open -a Spectacle
+
     # # Require password immediately after sleep or screen saver begins
     # defaults write com.apple.screensaver askForPassword -int 1
     # defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -319,5 +407,24 @@
     # # Spotlight settings
     # sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
     # sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+
+    # Remove duplicates in the "Open With" menu
+    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
   '';
+
+  # VSCode settings
+  system.defaults."com.microsoft.VSCode" = {
+    "ApplePressAndHoldEnabled" = false;      # Enable key repeat for VSCode
+    "AutoUpdate" = true;                     # Enable auto-updates
+    "ShowWelcome" = 0;                       # Don't show welcome screen
+    "NSNavLastRootDirectory" = "~/repo";     # Default directory
+  };
+
+  # VSCode Workspace settings
+  # system.defaults."com.microsoft.VSCode.WorkspaceStorageService" = {};
+
+  # VSCode Crash Reporter
+  system.defaults."com.microsoft.VSCode.CrashReporter" = {
+    "DisableCrashReporter" = true;           # Disable crash reporter
+  };
 } 
