@@ -225,13 +225,13 @@
   #   };
   # };
 
-  # # Or alternatively, use system.activationScripts
-  # system.activationScripts.postActivation.text = ''
-  #   # Spectacle settings
-  #   defaults write com.divisiblebyzero.Spectacle MoveToFullscreen -string "^@\$space"
-  #   defaults write com.divisiblebyzero.Spectacle StatusItemEnabled -int 1
-  #   defaults write com.divisiblebyzero.Spectacle WindowSnapping -int 1
-  # '';
+  # Or alternatively, use system.activationScripts
+  system.activationScripts.postActivation.text = ''
+    # Spectacle settings
+    defaults write com.divisiblebyzero.Spectacle MoveToFullscreen -string "^@\$space"
+    defaults write com.divisiblebyzero.Spectacle StatusItemEnabled -int 1
+    defaults write com.divisiblebyzero.Spectacle WindowSnapping -int 1
+  '';
 
   # # Warp Terminal settings
   # system.defaults."dev.warp.Warp-Stable" = {

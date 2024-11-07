@@ -49,7 +49,7 @@ in
 
     masApps = {
       # "1password" = 1333542190;
-      # "Amphetamine" = 937984704;
+      "Amphetamine" = 937984704;
       # "BetterSnapTool" = 417375580;
       "Flycut" = 442160987;
       # "wireguard" = 1451685025;
@@ -85,7 +85,7 @@ in
         # Apps
         { path = "/Applications/Slack.app/"; }
         { path = "${pkgs.google-chrome}/Applications/Google Chrome.app/"; }
-        { path = "${pkgs.firefox}/Applications/Firefox.app/"; }
+        # { path = "${pkgs.firefox}/Applications/Firefox.app/"; }
         { path = "/Applications/Safari.app/"; }
         { path = "${pkgs.spotify}/Applications/Spotify.app/"; }
         { path = "/System/Applications/Messages.app/"; }

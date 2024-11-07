@@ -7,6 +7,7 @@ let user = "tmorrow.cont"; in
   imports = [
     ../../modules/darwin/secrets.nix
     ../../modules/darwin/home-manager.nix
+    # ../../modules/darwin/system-preferences.nix
     ../../modules/shared
     agenix.darwinModules.default
   ];

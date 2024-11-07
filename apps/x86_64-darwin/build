@@ -8,12 +8,27 @@ NC='\033[0m'
 SYSTEM_TYPE="x86_64-darwin"
 FLAKE_SYSTEM="darwinConfigurations.${SYSTEM_TYPE}.system"
 
+# Create and use a custom temp directory
+export TMPDIR="$HOME/.nixbuild-tmp"
+mkdir -p "$TMPDIR"
+
+# Ensure these environment variables are set
 export NIXPKGS_ALLOW_UNFREE=1
+export USER=$(whoami)
+export HOME="/Users/$USER"
 
 echo "${YELLOW}Starting build...${NC}"
-nix --extra-experimental-features 'nix-command flakes' build .#$FLAKE_SYSTEM $@
+# Remove sudo, add --impure flag
+nix --extra-experimental-features 'nix-command flakes' \
+    build \
+    --impure \
+    -L \
+    --show-trace \
+    # --option sandbox false \
+    .#$FLAKE_SYSTEM $@
 
 echo "${YELLOW}Cleaning up...${NC}"
-unlink ./result
+rm -rf "$TMPDIR"
+[ -L ./result ] && unlink ./result
 
 echo "${GREEN}Build complete!${NC}"
