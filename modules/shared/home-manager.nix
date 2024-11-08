@@ -62,7 +62,7 @@ let name = "Lacy Morrow";
       export VISUAL="emacsclient -c -a emacs"
 
       # Enable recursive globbing
-      setopt extended_glob
+      # setopt extended_glob
 
       # Load Homebrew
       if [ -f /opt/homebrew/bin/brew ]; then

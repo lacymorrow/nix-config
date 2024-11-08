@@ -14,10 +14,6 @@ _:
   # "chefdk"
   # "chromedriver"
   # "codekit"
-  # "docker"        # Keep as cask (due to special system integration)
-  # "google-chrome" # Keep as cask (due to auto-updates)
-  # "warp"         # Keep as cask (not in nixpkgs)
-  # "spectacle"    # Keep as cask (not in nixpkgs)
 
   # Communication Tools
   "discord"
@@ -41,7 +37,6 @@ _:
 
   # Browsers
   # "google-chrome"
-  "firefox"
 
   # Creative Tools
   "gimp"
@@ -70,12 +65,3 @@ _:
   "syntax-highlight"
   "qlvideo"
 ]
-  # "docker"
-  # "google-chrome"
-  # "visual-studio-code"
-# "postman"
-  # "warp"
-  # "iterm2"
-  # "slack"
-  # "spotify"
-  # "spectacle"

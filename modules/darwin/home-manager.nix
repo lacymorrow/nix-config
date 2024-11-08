@@ -49,7 +49,7 @@ in
 
     masApps = {
       # "1password" = 1333542190;
-      # "Amphetamine" = 937984704;
+      "Amphetamine" = 937984704;
       # "BetterSnapTool" = 417375580;
       "Flycut" = 442160987;
       # "wireguard" = 1451685025;
@@ -84,15 +84,15 @@ in
       entries = [
         # Apps
         { path = "/Applications/Slack.app/"; }
+        { path = "${pkgs.google-chrome}/Applications/Google Chrome.app/"; }
+        # { path = "${pkgs.firefox}/Applications/Firefox.app/"; }
+        { path = "/Applications/Safari.app/"; }
+        { path = "${pkgs.spotify}/Applications/Spotify.app/"; }
         { path = "/System/Applications/Messages.app/"; }
-        { path = "/System/Applications/Facetime.app/"; }
-        { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-        { path = "/System/Applications/Music.app/"; }
-        { path = "/System/Applications/News.app/"; }
-        { path = "/System/Applications/Photos.app/"; }
-        { path = "/System/Applications/Photo Booth.app/"; }
-        { path = "/System/Applications/TV.app/"; }
-        { path = "/System/Applications/Home.app/"; }
+        { path = "/Applications/zoom.us.app/"; }
+        { path = "${pkgs.vscode}/Applications/Visual Studio Code.app/"; }
+        { path = "/Applications/Cursor.app/"; }
+        { path = "/Applications/Warp.app/"; }
 
         # Folders - right side of dock
         {

@@ -8,12 +8,23 @@ NC='\033[0m'
 SYSTEM_TYPE="x86_64-darwin"
 FLAKE_SYSTEM="darwinConfigurations.${SYSTEM_TYPE}.system"
 
+# Create and use a custom temp directory
+export TMPDIR="$HOME/.nixbuild-tmp"
+mkdir -p "$TMPDIR"
+
 export NIXPKGS_ALLOW_UNFREE=1
 
 echo "${YELLOW}Starting build...${NC}"
-nix --extra-experimental-features 'nix-command flakes' build .#$FLAKE_SYSTEM $@
+nix --extra-experimental-features 'nix-command flakes' \
+    build \
+    --impure \
+    -vvvv \
+    --show-trace \
+    --option sandbox false \
+    .#$FLAKE_SYSTEM $@
 
 echo "${YELLOW}Cleaning up...${NC}"
-unlink ./result
+rm -rf "$TMPDIR"
+[ -L ./result ] && unlink ./result
 
 echo "${GREEN}Build complete!${NC}"
