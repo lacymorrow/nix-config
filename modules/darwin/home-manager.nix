@@ -34,7 +34,6 @@ in
     #   "homebrew/services"
     #   "buo/cask-upgrade"
     # ];
-    # onActivation.cleanup = "uninstall";
 
     # These app IDs are from using the mas CLI app
     # mas = mac app store
