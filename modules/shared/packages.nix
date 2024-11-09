@@ -2,7 +2,7 @@
 
 with pkgs; [
   # Terminal Emulators
-  alacritty
+  # alacritty
 
   # Core CLI Tools
   bat

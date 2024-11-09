@@ -14,6 +14,7 @@ _:
   # "chefdk"
   # "chromedriver"
   # "codekit"
+  "cursor"
 
   # Communication Tools
   "discord"

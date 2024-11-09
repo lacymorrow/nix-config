@@ -52,7 +52,7 @@ in
       "Amphetamine" = 937984704;
       # "BetterSnapTool" = 417375580;
       "Flycut" = 442160987;
-      # "wireguard" = 1451685025;
+      "WireGuard" = 1451685025;
     };
   };
 
@@ -83,30 +83,33 @@ in
       enable = true;
       entries = [
         # Apps
+        { path = "/Applications/System Settings.app/"; }
         { path = "/Applications/Slack.app/"; }
-        { path = "${pkgs.google-chrome}/Applications/Google Chrome.app/"; }
-        # { path = "${pkgs.firefox}/Applications/Firefox.app/"; }
-        { path = "/Applications/Safari.app/"; }
-        { path = "${pkgs.spotify}/Applications/Spotify.app/"; }
-        { path = "/System/Applications/Messages.app/"; }
         { path = "/Applications/zoom.us.app/"; }
-        { path = "${pkgs.vscode}/Applications/Visual Studio Code.app/"; }
-        { path = "/Applications/Cursor.app/"; }
+        # { path = "/Applications/Spotify.app/"; }
+        { path = "/Applications/Firefox.app/"; }
+        { path = "/Applications/Safari.app/"; }
+        { path = "/Applications/Messages.app/"; }
+        { path = "/Applications/Google Chrome.app/"; }
+        { path = "/Applications/Utilities/Terminal.app/"; }
         { path = "/Applications/Warp.app/"; }
+        { path = "${pkgs.spotify}/Applications/Spotify.app"; }
+        { path = "/Applications/Cursor.app/"; }
+        { path = "/Applications/Visual Studio Code.app/"; }
 
         # Folders - right side of dock
         {
-          path = "${config.users.users.${user}.home}/Applications";
+          path = "/Applications";
           section = "others";
-          options = "--sort name --view grid --display folder";
-        }
-        {
-          path = "${config.users.users.${user}.home}/Documents";
-          section = "others";
-          options = "--sort name --view grid --display folder";
+          options = "--sort name --view grid --display stack";
         }
         {
           path = "${config.users.users.${user}.home}/Downloads";
+          section = "others";
+          options = "--sort name --view grid --display stack";
+        }
+        {
+          path = "${config.users.users.${user}.home}/Documents";
           section = "others";
           options = "--sort name --view grid --display stack";
         }

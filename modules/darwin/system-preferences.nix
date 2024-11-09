@@ -30,6 +30,8 @@
       static-only = false;
       # Set the icon size of Dock items
       tilesize = 48;
+      # Set the orientation of the Dock
+      orientation = "bottom";
 
       # Additional settings from host config
       launchanim = true;
@@ -59,10 +61,17 @@
       _FXShowPosixPathInTitle = true;
     };
 
+    LaunchServices = {
+      # Disable the quarantine warning
+      LSQuarantine = false;
+    };
+
     # Global system settings
     NSGlobalDomain = {
       # Enable full keyboard access for all controls
       AppleKeyboardUIMode = 3;
+      # Disable press-and-hold for keys
+      ApplePressAndHoldEnabled = false;
       # Show all filename extensions
       AppleShowAllExtensions = true;
       # Always show scrollbars
@@ -435,36 +444,3 @@
   #   "DisableCrashReporter" = true;           # Disable crash reporter
   # };
 } 
-
-      #   # Override with host-specific settings
-      #   NSGlobalDomain = {
-      #     AppleShowAllExtensions = true;
-      #     ApplePressAndHoldEnabled = false;
-
-      #     # 120, 90, 60, 30, 12, 6, 2
-      #     KeyRepeat = 2;
-
-      #     # 120, 94, 68, 35, 25, 15
-      #     InitialKeyRepeat = 15;
-
-      #     "com.apple.mouse.tapBehavior" = 1;
-      #     "com.apple.sound.beep.volume" = 0.0;
-      #     "com.apple.sound.beep.feedback" = 0;
-      #   };
-
-      #   dock = {
-      #     autohide = false;
-      #     show-recents = false;
-      #     launchanim = true;
-      #     orientation = "bottom";
-      #     tilesize = 48;
-      #   };
-
-      #   finder = {
-      #     _FXShowPosixPathInTitle = false;
-      #   };
-
-      #   trackpad = {
-      #     Clicking = true;
-      #     TrackpadThreeFingerDrag = true;
-      #   };
