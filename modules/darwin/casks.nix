@@ -1,39 +1,66 @@
 _: [
   # Development Tools
-  "docker"
-  "warp"
-  "visual-studio-code"
-  "homebrew/cask/docker"
-  "postman"
-  "cyberduck"
-  
-  # Browsers
-  "firefox"
-  "google-chrome"
-  
-  # Communication  
+  # "homebrew/cask/docker"
+  # "visual-studio-code"
+  "ngrok"
+  # "postman"
+  # "warp"
+  # "iterm2"
+  "dash"
+  # "atom"
+  # "brackets"
+  # "chefdk"
+  # "chromedriver"
+  # "codekit"
+  "cursor"
+
+  # Communication Tools
   "discord"
   # "notion"
-  "slack"
+  # "slack"
   # "telegram"
   "zoom"
-  
-  # Productivity Tools
-  "raycast"
 
-  # Utilities
+  # Utility Tools
   "syncthing"
   "angry-ip-scanner"
-  "ngrok"
-  
-  # Media
+  "cyberduck"
+  "raycast"
+  "spectacle"
+  "betterzip"
+
+  # Entertainment Tools
   "vlc"
+  # "spotify"
+  "transmission"
+
+  # Browsers
+  # "google-chrome"
+
+  # Creative Tools
   "gimp"
   "inkscape"
-  
+
+  # Virtualization
+  # "vagrant"
+  "virtualbox"
+  # "docker"
+  "vmware-fusion"
+
   # System Tools
   "unetbootin"
-  "virtualbox"
-  "vagrant"
   "xquartz"
+
+  # QuickLook Plugins
+  "qlcolorcode"
+  "qlstephen"
+  "qlmarkdown"
+  "quicklook-json"
+  "qlprettypatch"
+  "quicklook-csv"
+  "qlimagesize"
+  "webpquicklook"
+  "suspicious-package"
+  "syntax-highlight"
+  "qlvideo"
 ]

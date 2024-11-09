@@ -1,93 +1,90 @@
 { pkgs }:
 
 with pkgs; [
-  # Shell utilities
+  # Terminal Emulators
+  # alacritty
+
+  # Core CLI Tools
   bat
   coreutils
-  findutils
-  gawk
-  gnused
-  gnutls
-  less
+  killall
   tree
+  unzip
   wget
-  zsh
-  zsh-autosuggestions
-  zsh-completions
-  zsh-syntax-highlighting
-
-  # Development tools
-  git
-  nodejs
-  yarn
-  pnpm
-  docker
-  docker-compose
-
-  # System utilities
-  ffmpeg
-  imagemagick
-  trash-cli
-  wget
-  
-  # Additional tools from your Brewfile
-  mas # Mac App Store CLI
-
-  # General packages for development and system management
-  alacritty
-  # aspell
-  # aspellDicts.en
-  # bash-completion
-  # bat
-  # btop
-  # coreutils
-  # killall
-  # neofetch
-  # openssh
-  # sqlite
-  # wget
   # zip
 
-  # # Encryption and security tools
-  # age
-  # age-plugin-yubikey
-  # gnupg
-  # libfido2
+  # Shell & Terminal Utilities
+  # bash-completion
+  # btop
+  fd
+  htop
+  # iftop
+  jq
+  # neofetch
+  ripgrep
+  # tmux
+  # unrar
+  zsh-powerlevel10k
 
-  # # Cloud-related tools and SDKs
-  # docker
-  # docker-compose
+  # Development Tools
+  docker
+  docker-compose
+  # mercurial
+  # socat
+  # watchman
 
-  # # Media-related packages
-  # emacs-all-the-icons-fonts
+  # Node.js & JavaScript
+  nodejs
+  nodePackages.pnpm
+  nodePackages.yarn
+  nodePackages.eslint
+  nodePackages.npm-check-updates
+  # nodePackages.prettier
+
+  # Python Development
+  # python39
+  # python39Packages.virtualenv
+  # python
+  # python3
+
+  # Ruby Development
+  # ruby-build
+  # ruby
+
+  # Media & Image Processing
+  ffmpeg
+  imagemagick
+
+  # Security & Encryption
+  gnupg
+  openssh
+
+  # System Utilities
+  findutils
+  gawk
+  gnugrep
+  gnused
+  gnutar
+  # sqlite
+
+  # Text Processing & Spell Checking
+  # aspell
+  # aspellDicts.en
+  # hunspell
+
+  # Fonts & Typography
   # dejavu_fonts
-  # ffmpeg
-  # fd
+  # emacs-all-the-icons-fonts
   # font-awesome
-  # hack-font
+  hack-font
+  # jetbrains-mono
   # noto-fonts
   # noto-fonts-emoji
   # meslo-lgs-nf
 
-  # # Node.js development tools
-  # nodePackages.npm # globally install npm
-  # nodePackages.prettier
-  # nodejs
-
-  # # Text and terminal utilities
-  # htop
-  # hunspell
-  # iftop
-  # jetbrains-mono
-  # jq
-  # ripgrep
-  # tree
-  # tmux
-  # unrar
-  # unzip
-  # zsh-powerlevel10k
-
-  # # Python packages
-  # python39
-  # python39Packages.virtualenv # globally install virtualenv
+  # Shell enhancements
+  starship    # Cross-shell prompt
+  zoxide      # Smarter cd command
+  nushell     # Modern shell alternative
+  asdf-vm    # Version manager
 ]

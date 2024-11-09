@@ -7,7 +7,8 @@ let
 in
 {
   imports = [
-    ./dock
+   ./dock
+   ./system-preferences.nix
   ];
 
   # User configuration
@@ -21,19 +22,45 @@ in
   # Homebrew configuration
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap"; # Uninstall unmanaged packages
+      upgrade = true;
+    };
+    
     casks = pkgs.callPackage ./casks.nix {};
+    brews = pkgs.callPackage ./brews.nix {};
+    # taps = [
+    #   "homebrew/cask-versions"
+    #   "homebrew/services"
+    #   "buo/cask-upgrade"
+    # ];
+    # onActivation.cleanup = "uninstall";
+
+    # These app IDs are from using the mas CLI app
+    # mas = mac app store
+    # https://github.com/mas-cli/mas
+    #
+    # $ nix shell nixpkgs#mas
+    # $ mas search <app name>
+    #
+    # If you have previously added these apps to your Mac App Store profile (but not installed them on this system),
+    # you may receive an error message "Redownload Unavailable with This Apple ID".
+    # This message is safe to ignore. (https://github.com/dustinlyons/nixos-config/issues/83)
+
     masApps = {
-      "1password" = 1333542190;
-      "wireguard" = 1451685025;
+      # "1password" = 1333542190;
+      "Amphetamine" = 937984704;
+      # "BetterSnapTool" = 417375580;
+      "Flycut" = 442160987;
+      "WireGuard" = 1451685025;
     };
   };
 
   # Home Manager configuration
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, ... }: {
-      imports = [ ../shared/home-manager.nix ];
-      
+    users.${user} = { pkgs, config, lib, ... }: {
       home = {
         packages = pkgs.callPackage ./packages.nix {};
         file = lib.mkMerge [
@@ -42,35 +69,50 @@ in
         ];
         stateVersion = "23.11";
       };
+      
+      # Import programs directly
+      programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
 
       manual.manpages.enable = false;
     };
   };
 
-  # Dock configuration
-  local.dock = {
-    enable = true;
-    entries = [
-      { path = "/Applications/Slack.app/"; }
-      { path = "/System/Applications/Messages.app/"; }
-      { path = "/System/Applications/Facetime.app/"; }
-      { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "/System/Applications/Music.app/"; }
-      { path = "/System/Applications/News.app/"; }
-      { path = "/System/Applications/Photos.app/"; }
-      { path = "/System/Applications/Photo Booth.app/"; }
-      { path = "/System/Applications/TV.app/"; }
-      { path = "/System/Applications/Home.app/"; }
-      {
-        path = "${config.users.users.${user}.home}/.local/share/";
-        section = "others";
-        options = "--sort name --view grid --display folder";
-      }
-      {
-        path = "${config.users.users.${user}.home}/.local/share/downloads";
-        section = "others";
-        options = "--sort name --view grid --display stack";
-      }
-    ];
+  # Fully declarative dock using the latest from Nix Store
+  local = { 
+    dock = {
+      enable = true;
+      entries = [
+        # Apps
+        { path = "/Applications/System Settings.app/"; }
+        { path = "/Applications/Google Chrome.app/"; }
+        { path = "/Applications/Slack.app/"; }
+        { path = "/Applications/zoom.us.app/"; }
+        { path = "/Applications/Messages.app/"; }
+        { path = "${pkgs.spotify}/Applications/Spotify.app"; }
+        # { path = "/Applications/Firefox.app/"; }
+        # { path = "/Applications/Safari.app/"; }
+        { path = "/Applications/Utilities/Terminal.app/"; }
+        { path = "/Applications/Warp.app/"; }
+        { path = "/Applications/Cursor.app/"; }
+        { path = "/Applications/Visual Studio Code.app/"; }
+
+        # Folders - right side of dock
+        {
+          path = "/Applications";
+          section = "others";
+          options = "--sort name --view grid --display stack";
+        }
+        {
+          path = "${config.users.users.${user}.home}/Downloads";
+          section = "others";
+          options = "--sort name --view grid --display stack";
+        }
+        {
+          path = "${config.users.users.${user}.home}/Documents";
+          section = "others";
+          options = "--sort name --view grid --display stack";
+        }
+      ];
+    };
   };
 }
