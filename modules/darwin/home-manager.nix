@@ -84,16 +84,15 @@ in
       entries = [
         # Apps
         { path = "/Applications/System Settings.app/"; }
+        { path = "/Applications/Google Chrome.app/"; }
         { path = "/Applications/Slack.app/"; }
         { path = "/Applications/zoom.us.app/"; }
-        # { path = "/Applications/Spotify.app/"; }
-        { path = "/Applications/Firefox.app/"; }
-        { path = "/Applications/Safari.app/"; }
         { path = "/Applications/Messages.app/"; }
-        { path = "/Applications/Google Chrome.app/"; }
+        { path = "${pkgs.spotify}/Applications/Spotify.app"; }
+        # { path = "/Applications/Firefox.app/"; }
+        # { path = "/Applications/Safari.app/"; }
         { path = "/Applications/Utilities/Terminal.app/"; }
         { path = "/Applications/Warp.app/"; }
-        { path = "${pkgs.spotify}/Applications/Spotify.app"; }
         { path = "/Applications/Cursor.app/"; }
         { path = "/Applications/Visual Studio Code.app/"; }
 
