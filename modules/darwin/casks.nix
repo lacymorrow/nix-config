@@ -35,6 +35,7 @@ _: [
   "transmission"
 
   # Browsers
+  "firefox"
   # "google-chrome"
 
   # Creative Tools

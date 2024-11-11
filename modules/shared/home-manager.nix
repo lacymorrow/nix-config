@@ -7,7 +7,7 @@
     cdpath = [ "~/.local/share/src" ];
     autosuggestion.enable = true;
     enableCompletion = true;           # This is the correct option for zsh completion
-    
+
     plugins = [
       {
         name = "powerlevel10k";
@@ -104,13 +104,18 @@
       # Killall completions
       complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari SystemUIServer Terminal" killall
 
+      # Aliases
+      if [ -f ~/.aliases ]; then
+        source ~/.aliases
+      fi
+
       # Source docker aliases if file exists
       if [ -f ~/.docker_aliases ]; then
         source ~/.docker_aliases
       fi
 
       # Initialize asdf
-      . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
+      # . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
 
       # Initialize zoxide
       eval "$(zoxide init zsh)"
@@ -126,7 +131,7 @@
     userName = name;
     userEmail = email;
     lfs.enable = true;
-    
+
     aliases = {
       # View abbreviated SHA, description, and history graph of the latest 20 commits
       l = "log --pretty=oneline -n 20 --graph --abbrev-commit";
@@ -392,10 +397,10 @@
       bind-key -T copy-mode-vi 'C-\' select-pane -l
       '';
     };
-  
+
   nushell = {
     enable = true;
-    
+
     # Configure environment
     environmentVariables = {
       EDITOR = "vim";
@@ -424,7 +429,7 @@
           algorithm: "prefix"
         }
         keybindings: []
-        
+
         # Hook up starship prompt
         prompt: (starship prompt)
       }
